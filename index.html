@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Ajibodu × Moniepoint</title>
+<link rel="preconnect" href="https://fonts.cdnfonts.com">
+<style>
+@import url('https://fonts.cdnfonts.com/css/lufga');
+
+/* ============================================
+   LIGHT MODE (DEFAULT)
+   ============================================ */
+:root {
+  --mp:#0357EE; --mp-l:#3D7BF4; --mp-xl:#D6E4FD; --mp-d:#021F5C;
+  --bg:#F4F6FB; --bg2:#EAF0FC; --ink:#0A0F1E; --muted:#4A5270;
+  --border:rgba(3,87,238,0.14); --card:#FFFFFF; --nav-bg:rgba(244,246,251,0.94);
+  --badge-bg:rgba(3,87,238,0.07); --feat-bg:#FFFFFF; --feat-open:#EDF2FE;
+  --qb-bg:rgba(3,87,238,0.05); --vbox-bg:rgba(3,87,238,0.04);
+  --flow-bg:rgba(3,87,238,0.03); --flow-hl:rgba(3,87,238,0.09);
+  --ai-bg:#FFFFFF; --val-bg:#FFFFFF; --plat-bg:#EAF0FC;
+  --btn-g-color:#0A0F1E; --btn-g-border:rgba(3,87,238,0.3);
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+@media (prefers-color-scheme:dark) {
+  :root {
+    --bg:#07091A; --bg2:#0B0E28; --ink:#FFFFFF; --muted:rgba(255,255,255,0.55);
+    --border:rgba(3,87,238,0.22); --card:#0B0E28; --nav-bg:rgba(7,9,26,0.94);
+    --badge-bg:rgba(3,87,238,0.08); --feat-bg:#07091A; --feat-open:#0A0D22;
+    --qb-bg:rgba(3,87,238,0.07); --vbox-bg:rgba(3,87,238,0.05);
+    --flow-bg:rgba(3,87,238,0.03); --flow-hl:rgba(3,87,238,0.1);
+    --ai-bg:#07091A; --val-bg:#0B0E28; --plat-bg:#0B0E28;
+    --btn-g-color:#FFFFFF; --btn-g-border:rgba(255,255,255,0.2);
+  }
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;text-decoration:none !important}
+html{scroll-behavior:smooth}
+body{font-family:'Lufga',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--mp),var(--mp-l));z-index:200;width:0%;transition:width 0.1s linear;border-radius:0 2px 2px 0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.5rem;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border)}
+.nlogo{font-size:0.8rem;font-weight:700;color:var(--mp-l);letter-spacing:0.02em}
+.nmenu-btn{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nmenu-btn span{display:block;width:22px;height:2px;background:var(--mp-l);border-radius:2px;transition:all 0.3s}
+.nlinks{display:flex;gap:1.5rem;align-items:center}
+.nlinks a{font-size:0.68rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nlinks a:hover{color:var(--mp-l)}
+@media(max-width:768px){
+  .nmenu-btn{display:flex}
+  .nlinks{display:none;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);padding:0.5rem 0}
+  .nlinks.open{display:flex}
+  .nlinks a{padding:0.75rem 1.5rem;font-size:0.75rem;border-bottom:0.5px solid var(--border)}
+}
+
+.sec{padding:5rem 1.5rem;max-width:1100px;margin:0 auto}
+.sl{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--mp-l);margin-bottom:0.6rem;font-weight:500}
+.st{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;line-height:1.1;margin-bottom:1rem}
+.st span{color:var(--mp-l)}
+.sb{font-size:0.9rem;font-weight:400;color:var(--muted);line-height:1.85}
+.dv{height:0.5px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 1.5rem}
+.pill{display:inline-block;padding:0.25rem 0.75rem;background:rgba(3,87,238,0.1);border:0.5px solid var(--border);font-size:0.65rem;font-weight:500;color:var(--mp-l);border-radius:3px;margin-top:0.5rem}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 1.5rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 30%,rgba(3,87,238,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;opacity:0.5}
+.hbadge{display:inline-flex;align-items:center;gap:0.45rem;padding:0.28rem 0.9rem;border:0.5px solid var(--border);border-radius:20px;background:var(--badge-bg);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mp-l);margin-bottom:1.5rem;opacity:0;animation:fu 0.7s 0.1s ease forwards}
+.hdot{width:5px;height:5px;border-radius:50%;background:var(--mp-l);animation:blink 2s infinite}
+.hero h1{font-size:clamp(2.4rem,7vw,5.5rem);font-weight:700;line-height:1.04;letter-spacing:-0.03em;opacity:0;animation:fu 0.7s 0.3s ease forwards}
+.hero h1 span{color:var(--mp-l)}
+.hsub{margin-top:1.2rem;font-size:clamp(0.9rem,2vw,1rem);font-weight:400;color:var(--muted);max-width:520px;line-height:1.82;opacity:0;animation:fu 0.7s 0.5s ease forwards}
+.hcta{margin-top:2rem;display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fu 0.7s 0.7s ease forwards}
+.btn-p{padding:0.8rem 1.8rem;background:var(--mp);color:#fff;font-family:'Lufga',sans-serif;font-size:0.82rem;font-weight:500;border:none;cursor:pointer;border-radius:5px;transition:all 0.2s}
+.btn-p:hover{background:var(--mp-l);transform:translateY(-1px)}
+.btn-g{padding:0.8rem 1.8rem;background:transparent;color:var(--btn-g-color);font-family:'Lufga',sans-serif;font-size:0.82rem;font-weight:400;border:1px solid var(--btn-g-border);cursor:pointer;border-radius:5px;transition:all 0.2s}
+.btn-g:hover{border-color:var(--mp-l);color:var(--mp-l)}
+.scroll-h{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:0.6rem;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase;animation:pulse 3s infinite;opacity:0.5}
+
+/* HOOK STRIP */
+.hook{background:var(--mp);color:#fff;padding:3rem 1.5rem;text-align:center}
+.hook-inner{max-width:700px;margin:0 auto}
+.hook h2{font-size:clamp(1.3rem,3.5vw,2rem);font-weight:700;line-height:1.25;margin-bottom:1rem}
+.hook p{font-size:0.9rem;font-weight:300;opacity:0.85;line-height:1.8}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5px;background:var(--border);border:0.5px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2.5rem}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr}}
+.stat-c{background:var(--card);padding:1.5rem 1rem;text-align:center}
+.stat-num{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--mp-l);line-height:1;letter-spacing:-0.02em}
+.stat-lbl{font-size:0.78rem;font-weight:400;color:var(--muted);margin-top:0.35rem;line-height:1.4}
+
+/* COMPETITOR ROW */
+.vs-row{display:flex;gap:0.5px;border-radius:8px;overflow:hidden;background:var(--border);margin-top:2rem}
+.vs-c{flex:1;padding:1.1rem;background:var(--card)}
+.vs-c.win{background:rgba(3,87,238,0.08);border:0.5px solid var(--mp-l)}
+.vs-lbl{font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:0.28rem}
+.vs-nm{font-size:0.84rem;font-weight:600;margin-bottom:0.28rem}
+.vs-c.win .vs-nm{color:var(--mp-l)}
+.vs-d{font-size:0.76rem;font-weight:300;color:var(--muted);line-height:1.5}
+.win-tag{display:inline-block;font-size:0.54rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mp-l);border:0.5px solid var(--mp);padding:0.1rem 0.5rem;border-radius:3px;margin-bottom:0.28rem}
+@media(max-width:600px){.vs-row{flex-direction:column}}
+
+/* RESEARCH */
+.find-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:2.5rem}
+@media(max-width:640px){.find-grid{grid-template-columns:1fr}}
+.f-card{background:var(--card);padding:1.5rem;transition:background 0.2s}
+.f-card:hover{background:var(--feat-open)}
+.f-num{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mp-l);opacity:0.65;margin-bottom:0.35rem;font-weight:700}
+.f-title{font-size:0.94rem;font-weight:600;margin-bottom:0.5rem}
+.f-body{font-size:0.78rem;font-weight:400;color:var(--muted);line-height:1.75}
+.f-body em{color:var(--mp-l);font-style:italic}
+.qb{margin-top:0.75rem;padding:0.65rem 0.85rem;border-left:2px solid var(--mp);background:var(--qb-bg);border-radius:0 4px 4px 0}
+.qb p{font-size:0.74rem;font-weight:300;color:var(--muted);line-height:1.65;font-style:italic}
+.qb span{display:block;font-size:0.6rem;color:var(--muted);margin-top:0.3rem;opacity:0.6}
+
+/* VERDICT */
+.vbox{margin-top:2.5rem;padding:1.75rem;border:0.5px solid var(--border);border-radius:8px;background:var(--vbox-bg);display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+@media(max-width:640px){.vbox{grid-template-columns:1fr}}
+.vt{font-size:1.2rem;font-weight:700;line-height:1.2}
+.vb{font-size:0.78rem;font-weight:300;color:var(--muted);line-height:1.78;margin-top:0.4rem}
+.vps{display:flex;flex-direction:column;gap:0.5rem}
+.vp{display:flex;align-items:flex-start;gap:0.6rem;padding:0.5rem 0.75rem;border:0.5px solid var(--border);border-radius:4px;background:var(--card);font-size:0.75rem;font-weight:300;color:var(--muted);line-height:1.5}
+.vp strong{color:var(--mp-l);font-weight:500}
+
+/* FEATURES */
+.feat-suite{display:flex;flex-direction:column;gap:0.5px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:2.5rem}
+.fi{background:var(--feat-bg);padding:1.4rem 1.5rem;cursor:pointer;transition:background 0.2s}
+.fi:hover,.fi.open{background:var(--feat-open)}
+.fh{display:flex;align-items:center;justify-content:space-between}
+.fl2{display:flex;align-items:center;gap:0.75rem;flex:1;min-width:0}
+.ftag{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mp-l);opacity:0.7;min-width:55px;font-weight:500;white-space:nowrap}
+.fname{font-size:clamp(0.9rem,2.5vw,1.1rem);font-weight:700}
+.fsub{font-size:0.65rem;color:var(--muted);font-style:italic;display:none}
+@media(min-width:500px){.fsub{display:inline}}
+.ftl{font-size:0.7rem;font-weight:300;color:var(--muted);margin-right:1rem;white-space:nowrap;display:none}
+@media(min-width:640px){.ftl{display:block}}
+.ftog{font-size:1.3rem;color:var(--mp-l);transition:transform 0.3s;user-select:none;flex-shrink:0}
+.fi.open .ftog{transform:rotate(45deg)}
+.fbody{max-height:0;overflow:hidden;transition:max-height 0.45s ease}
+.fi.open .fbody{max-height:1400px}
+.fcols{padding:1.25rem 0 0.25rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;border-top:0.5px solid var(--border);margin-top:0.75rem}
+@media(max-width:640px){.fcols{grid-template-columns:1fr}}
+.fcol h4{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mp-l);opacity:0.62;margin-bottom:0.45rem;font-weight:500}
+.fcol p,.fcol li{font-size:0.78rem;font-weight:300;color:var(--muted);line-height:1.75}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.fcol li{padding-left:0.9rem;position:relative}
+.fcol li::before{content:'›';position:absolute;left:0;color:var(--mp-l);font-size:0.9rem;line-height:1.35}
+.rc{margin-top:0.75rem;padding:0.6rem 0.8rem;background:rgba(3,87,238,0.06);border:0.5px solid rgba(3,87,238,0.15);border-radius:4px;font-size:0.7rem;font-weight:300;color:var(--muted);line-height:1.65}
+.rc strong{color:var(--mp-l);font-weight:500}
+.honest-box{margin-top:0.75rem;padding:0.65rem 0.85rem;background:rgba(255,165,0,0.06);border:0.5px solid rgba(255,165,0,0.25);border-radius:4px;font-size:0.72rem;font-weight:300;color:var(--muted);line-height:1.65}
+.honest-box strong{color:#B8860B;font-weight:500}
+
+/* FLOW */
+.flow-wrap{margin-top:2.5rem;overflow-x:auto;padding-bottom:0.5rem}
+.flow-row{display:flex;min-width:700px;border:0.5px solid var(--border);border-radius:8px;overflow:hidden}
+.flow-s{flex:1;padding:1.25rem 1rem;background:var(--flow-bg);border-right:0.5px solid var(--border)}
+.flow-s:last-child{border-right:none}
+.flow-s.hl{background:var(--flow-hl)}
+.flow-n{font-size:0.54rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mp-l);opacity:0.42;margin-bottom:0.6rem;font-weight:500}
+.flow-ttl{font-size:0.84rem;font-weight:600;margin-bottom:0.4rem}
+.flow-txt{font-size:0.7rem;font-weight:300;color:var(--muted);line-height:1.65}
+.flow-note{margin-top:0.45rem;font-size:0.63rem;font-style:italic;color:var(--mp-l);opacity:0.65}
+
+/* AI */
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:2.5rem}
+@media(max-width:640px){.ai-grid{grid-template-columns:1fr}}
+.ac{background:var(--ai-bg);padding:1.6rem;transition:background 0.2s}
+.ac:hover{background:var(--feat-open)}
+.ac-lbl{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mp-l);opacity:0.5;margin-bottom:0.4rem;font-weight:500}
+.ac-ttl{font-size:0.94rem;font-weight:600;margin-bottom:0.65rem}
+.ac-txt{font-size:0.78rem;font-weight:300;color:var(--muted);line-height:1.78}
+.ac-hl{color:var(--mp-l);font-style:italic}
+
+/* VALUE */
+.val-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:2.5rem}
+@media(max-width:640px){.val-strip{grid-template-columns:1fr}}
+.val-c{background:var(--val-bg);padding:1.6rem;transition:background 0.2s}
+.val-c:hover{background:var(--feat-open)}
+.val-icon{font-size:1.5rem;margin-bottom:0.65rem;display:block}
+.val-title{font-size:0.94rem;font-weight:700;margin-bottom:0.5rem}
+.val-body{font-size:0.78rem;font-weight:300;color:var(--muted);line-height:1.78}
+.val-body em{color:var(--mp-l);font-style:italic}
+
+/* ABOUT */
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem}
+@media(max-width:640px){.about-g{grid-template-columns:1fr}}
+.impact-stack{display:flex;flex-direction:column;gap:0.85rem}
+.ii{padding:1.1rem 1.4rem;border-left:2px solid var(--mp);background:rgba(3,87,238,0.04);border-radius:0 6px 6px 0}
+.inum{font-size:1.9rem;font-weight:700;color:var(--mp-l);line-height:1;letter-spacing:-0.02em}
+.idesc{font-size:0.74rem;font-weight:300;color:var(--muted);margin-top:0.22rem;line-height:1.6}
+
+/* PLATFORM */
+.platform-sec{background:var(--plat-bg);padding:5rem 1.5rem}
+.platform-inner{max-width:800px;margin:0 auto}
+.platform-quote{margin-top:2rem;padding:2rem;border:0.5px solid var(--mp-l);border-radius:8px;background:rgba(3,87,238,0.06);position:relative}
+.pq-tag{position:absolute;top:-0.6rem;left:1.5rem;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mp-l);background:var(--plat-bg);padding:0 0.5rem;font-weight:600}
+.pq-name{font-size:0.82rem;font-weight:700;color:var(--mp-l);margin-bottom:0.25rem}
+.pq-role{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.85rem}
+.pq-body{font-size:0.84rem;font-weight:300;color:var(--muted);line-height:1.82}
+.pq-body em{color:var(--mp-l);font-style:italic}
+.pq-quote{margin-top:1rem;padding:0.7rem 1rem;border-left:2px solid var(--mp);background:var(--qb-bg);border-radius:0 4px 4px 0;font-size:0.76rem;font-weight:300;color:var(--muted);line-height:1.65;font-style:italic}
+.platform-story{margin-top:2rem;font-size:0.9rem;font-weight:300;color:var(--muted);line-height:1.9}
+.platform-story strong{color:var(--ink);font-weight:600}
+.platform-story em{color:var(--mp-l);font-style:italic}
+
+/* CTA */
+.cta-block{background:var(--mp);color:#fff;padding:3rem 1.5rem;text-align:center}
+.cta-inner{max-width:560px;margin:0 auto}
+.cta-block h3{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;line-height:1.2;margin-bottom:0.75rem}
+.cta-block p{font-size:0.88rem;font-weight:300;opacity:0.8;line-height:1.7;margin-bottom:1.75rem}
+.cta-btn{display:inline-block;padding:1rem 2.5rem;background:#fff;color:var(--mp);font-family:'Lufga',sans-serif;font-size:0.9rem;font-weight:700;border:none;cursor:pointer;border-radius:5px;transition:all 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+.cta-sub{margin-top:1rem;font-size:0.75rem;opacity:0.55}
+
+/* CLOSING */
+.closing-top{background:#021F5C;color:#fff;padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.closing-bg{position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 40%,rgba(3,87,238,0.35) 0%,transparent 70%);pointer-events:none}
+.closing-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(3,87,238,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(3,87,238,0.07) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.closing-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.closing-inner h2{font-size:clamp(1.5rem,4vw,2.8rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem}
+.closing-inner h2 span{color:var(--mp-xl)}
+.closing-sub{font-size:0.9rem;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.88;max-width:560px;margin:0 auto 2.5rem}
+.sig-name{font-size:1.35rem;font-weight:700;color:var(--mp-xl)}
+.sig-role{font-size:0.72rem;font-weight:400;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.25rem}
+.sig-links{display:flex;gap:1.25rem;justify-content:center;margin-top:1.25rem;flex-wrap:wrap}
+.sig-links a{font-size:0.66rem;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;border-bottom:0.5px solid rgba(255,255,255,0.15);padding-bottom:2px;transition:all 0.2s}
+.sig-links a:hover{color:var(--mp-xl);border-color:var(--mp-xl)}
+
+/* ANTHEM */
+.anthem-block{background:#0357EE;padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.anthem-block::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 22px,rgba(255,255,255,0.016) 22px,rgba(255,255,255,0.016) 44px)}
+.ain{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.achant{font-size:clamp(2rem,5.5vw,4rem);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-0.02em}
+.adivline{width:50px;height:1.5px;background:rgba(255,255,255,0.2);margin:1.3rem auto}
+.averse{font-size:clamp(0.84rem,1.8vw,0.98rem);font-weight:300;color:rgba(255,255,255,0.7);line-height:2.15;font-style:italic}
+.alove{font-size:clamp(1.3rem,3.2vw,2.2rem);font-weight:700;color:#fff;margin:1.25rem 0}
+.acounterfeit{margin:1.3rem 0;line-height:2.2}
+.acf1{font-size:clamp(0.82rem,1.8vw,1.05rem);font-weight:500;color:rgba(255,255,255,0.65);letter-spacing:0.03em;display:block}
+.acf2{font-size:clamp(0.82rem,1.8vw,1.05rem);font-weight:800;color:#fff;letter-spacing:0.03em;display:block;text-transform:uppercase}
+.agreats{display:flex;gap:0.5rem;justify-content:center;align-items:baseline;margin-top:2.5rem;flex-wrap:wrap}
+.agr{font-weight:800;color:#fff;opacity:0;animation:gr 0.5s ease forwards}
+.agr:nth-child(1){font-size:clamp(1.3rem,3.2vw,2.5rem);animation-delay:0.3s}
+.agr:nth-child(2){font-size:clamp(1.3rem,3.2vw,2.5rem);animation-delay:0.65s}
+.agr:nth-child(3){font-size:clamp(1.3rem,3.2vw,2.5rem);animation-delay:1s}
+.agr:nth-child(4){font-size:clamp(1.3rem,3.2vw,2.5rem);animation-delay:1.35s}
+.agr:nth-child(5){font-size:clamp(2rem,5.5vw,4.5rem);color:var(--mp-xl);animation-delay:1.7s;letter-spacing:-0.02em}
+.afoot{margin-top:2rem;font-size:0.62rem;color:rgba(255,255,255,0.35);letter-spacing:0.18em;text-transform:uppercase}
+
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:0.35}50%{opacity:1}}
+@keyframes pulse{0%,100%{opacity:0.2}50%{opacity:0.7}}
+@keyframes gr{from{opacity:0;transform:scale(0.3) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <div class="nlogo">Victor × Moniepoint</div>
+  <button class="nmenu-btn" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nlinks" id="navlinks">
+    <a href="#idea" onclick="closeMenu()">The Idea</a>
+    <a href="#proof" onclick="closeMenu()">Research</a>
+    <a href="#features" onclick="closeMenu()">Features</a>
+    <a href="#ai" onclick="closeMenu()">AI</a>
+    <a href="#about" onclick="closeMenu()">Victor</a>
+    <a href="#closing" onclick="closeMenu()">The Ask</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hbadge"><span class="hdot"></span>A Product Design Pitch · Victor Ajibodu · 2026</div>
+  <h1>What if Moniepoint owned<br><span>the way Nigerians<br>save together?</span></h1>
+  <p class="hsub">A research-validated, culturally rooted, AI-powered community finance suite — designed to make Moniepoint the undisputed home of Nigerian money culture.</p>
+  <div class="hcta">
+    <button class="btn-p" onclick="document.getElementById('idea').scrollIntoView({behavior:'smooth'})">See the Idea ↓</button>
+    <button class="btn-g" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Who is Victor?</button>
+  </div>
+  <div class="scroll-h">↓ 5 minute read</div>
+</div>
+
+<!-- HOOK -->
+<div class="hook">
+  <div class="hook-inner">
+    <h2 style="margin-bottom:0.75rem">"Execution is everything in this game.<br>Self-deception is not a virtue."</h2>
+    <p style="margin-top:0.5rem;font-size:0.82rem;opacity:0.7">— Tosin Eniolorunda, Moniepoint Founder and CEO · The Platform Nigeria, May 1, 2026</p>
+    <p style="margin-top:1.25rem">I was in that room. I heard that challenge. This page is my response — a product feature researched, validated, designed, and presented by a Nigerian designer who builds at global standard. Not a CV. Proof.</p>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- THE IDEA -->
+<div class="sec" id="idea">
+  <div class="sl">The Observation</div>
+  <div class="st">Moniepoint has won payments.<br><span>The savings war is still open.</span></div>
+  <p class="sb" style="max-width:640px">Piggyvest, Cowrywise, and Opay are all fighting for Nigeria's savings market. But the deepest gap that none of them has fully claimed is cultural. How Nigerians save together — Ajo, group goals, family accounts — has always lived outside formal finance. Competitors have touched pieces of it. No major bank with Moniepoint's infrastructure, reach, and trust has owned it entirely. Until now.</p>
+
+  <div class="stats-row">
+    <div class="stat-c">
+      <div class="stat-num">83%</div>
+      <div class="stat-lbl">Of African jobs are informal — the world Ajo was built in. Source: ILO / UN ECA, 2024</div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-num">16M+</div>
+      <div class="stat-lbl">Moniepoint personal banking users as of 2025. Source: Moniepoint 2025 Annual Report</div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-num">0</div>
+      <div class="stat-lbl">Nigerian fintech apps with a parent-to-child smart allowance, approval gates, and AI spend digest</div>
+    </div>
+  </div>
+
+  <div class="vs-row">
+    <div class="vs-c">
+      <div class="vs-lbl">Piggyvest</div>
+      <div class="vs-nm">Group Target Savings</div>
+      <div class="vs-d">Exists — and works for any shared goal. But each member's funds stay fully separate. No shared pot. No mutual approval gates. No banking ecosystem underneath it.</div>
+    </div>
+    <div class="vs-c">
+      <div class="vs-lbl">Cowrywise</div>
+      <div class="vs-nm">Money Duo</div>
+      <div class="vs-d">Private savings challenge for exactly two people. One year lock-in. No flexibility, no AI layer, no banking infrastructure. Cannot scale beyond couples.</div>
+    </div>
+    <div class="vs-c">
+      <div class="vs-lbl">Bankly / Alajo / OneBank</div>
+      <div class="vs-nm">Digital Ajo</div>
+      <div class="vs-d">Standalone apps or thin features. Alajo had ₦373M saved by April 2023. No POS network, no 16M user base, no CBN MFB licence at Moniepoint's scale.</div>
+    </div>
+    <div class="vs-c win">
+      <div class="win-tag">The Opportunity</div>
+      <div class="vs-nm">Moniepoint</div>
+      <div class="vs-d">CBN-licensed. 16M+ users. 1M+ POS terminals. 80% of Nigeria's in-person payments. The infrastructure exists. The features do not yet.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- RESEARCH -->
+<div style="background:var(--bg2);padding:5rem 1.5rem" id="proof">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sl">User Research · May 2026</div>
+    <div class="st">Not an idea.<br><span>A validated observation.</span></div>
+    <p class="sb" style="max-width:620px">Before a single screen was designed, I interviewed two real Ajo participants to understand what actually matters — and what would kill adoption of a digital version. Every design decision in this pitch maps back to what they said.</p>
+
+    <div class="find-grid">
+      <div class="f-card">
+        <div class="f-num">Finding 01</div>
+        <div class="f-title">Trust is personal — always</div>
+        <div class="f-body">Both respondents built groups only through personal networks. No stranger would be accepted regardless of any app verification. <em>MonieCircle is private-group only — closed circles of people who already know each other. By design, not compromise.</em></div>
+        <div class="qb"><p>"You are the one bringing them in. If they misbehave, it is on you."</p><span>— Respondent 1, Active Ajo Coordinator</span></div>
+      </div>
+      <div class="f-card">
+        <div class="f-num">Finding 02</div>
+        <div class="f-title">The coordinator carries every burden</div>
+        <div class="f-body">Reminders, disputes, covering shortfalls — all on one person, every single cycle. <em>MonieCircle automates exactly these tasks: auto-deduction, contribution tracking, and payout disbursement. The coordinator becomes an organiser, not a debt collector.</em></div>
+        <div class="qb"><p>"You have to remind them — this is the due date — enforcing the boundaries. That is the most stressful part."</p><span>— Respondent 1</span></div>
+      </div>
+      <div class="f-card">
+        <div class="f-num">Finding 03</div>
+        <div class="f-title">Delayed payouts are a recurring, costly pain</div>
+        <div class="f-body">Two delayed payouts experienced by Respondent 2 — both because the coordinator personally bridged shortfalls while waiting on late contributors. <em>Auto-deduction on due date plus Monie Sense early nudges plus Moniepoint's 1M+ POS terminal network for cash-in removes every excuse for lateness.</em></div>
+      </div>
+      <div class="f-card">
+        <div class="f-num">Finding 04</div>
+        <div class="f-title">The app must organise — not hold money</div>
+        <div class="f-body">Both respondents were uncomfortable with any app "holding" their funds. They want a facilitation layer — not a financial custodian. <em>MonieCircle is positioned as "your Ajo, organised" — not a savings product. Moniepoint facilitates. The trust stays human.</em></div>
+        <div class="qb"><p>"The app verifying them does not mean they will not withdraw and disappear."</p><span>— Respondent 2</span></div>
+      </div>
+      <div class="f-card">
+        <div class="f-num">Finding 05</div>
+        <div class="f-title">Fees must be group-agreed — never imposed</div>
+        <div class="f-body">Respondent 1 rejected any platform fee outright. Respondent 2 accepted it only if the group collectively agrees before the cycle begins. <em>MonieCircle's fee model is transparent and group-agreed at setup. Moniepoint never deducts silently.</em></div>
+      </div>
+      <div class="f-card">
+        <div class="f-num">Finding 06</div>
+        <div class="f-title">A trust safety net would close the deal</div>
+        <div class="f-body">Respondent 2 said a traceability mechanism or payout guarantee would significantly increase their confidence in using a digital version. <em>This directly validates Monie Sense's Ajo Trust Score — a behavioural reliability rating shown before anyone joins a circle.</em></div>
+      </div>
+    </div>
+
+    <div class="vbox">
+      <div>
+        <div class="vt">The verdict:<br><span style="color:var(--mp-l)">Real problem. Conditional appetite.</span></div>
+        <div class="vb">Adoption will happen if the app feels like a trusted organiser for known groups — not a platform that introduces financial risk. MonieCircle was designed precisely around these conditions, one finding at a time.</div>
+      </div>
+      <div class="vps">
+        <div class="vp">&#9989;&nbsp;<span><strong>Private groups only</strong> — closed circles, no strangers by design</span></div>
+        <div class="vp">&#9989;&nbsp;<span><strong>App as organiser</strong> — not a bank holding or controlling money</span></div>
+        <div class="vp">&#9989;&nbsp;<span><strong>Coordinator-first</strong> — automates their most painful and stressful tasks</span></div>
+        <div class="vp">&#9989;&nbsp;<span><strong>Group-agreed fees</strong> — no platform surprises, ever</span></div>
+        <div class="vp">&#9989;&nbsp;<span><strong>Trust Score safety net</strong> — behavioural reliability before joining any circle</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- FEATURES -->
+<div class="sec" id="features">
+  <div class="sl">The Feature Suite</div>
+  <div class="st">Three features.<br><span>One cultural moat.</span></div>
+  <p class="sb" style="max-width:600px">Each rooted in real Nigerian behaviour. Each fact-checked against what competitors offer. Each designed to go further than anything that currently exists.</p>
+
+  <div class="feat-suite">
+
+    <!-- MONIECIRCLE -->
+    <div class="fi open" onclick="toggleF(this)">
+      <div class="fh">
+        <div class="fl2"><span class="ftag">01 · Hero</span><span class="fname">MonieCircle</span><span class="fsub">&nbsp;— "Ajo, organised"</span></div>
+        <div style="display:flex;align-items:center"><span class="ftl">Your community, your turn</span><span class="ftog">+</span></div>
+      </div>
+      <div class="fbody"><div class="fcols">
+        <div class="fcol">
+          <h4>What it is</h4>
+          <p>A transparent, in-app rotating savings group built for private circles of trusted people. Admin creates the group, adds members by phone or account number only, sets the contribution amount, payout rotation, and monthly schedule. Every member sees the live circle balance on their own device. The admin has no direct access to pooled contributions and cannot hide a kobo.</p>
+          <div class="rc"><strong>Research-backed:</strong> Both respondents confirmed they only join groups with people they personally know. Private-group only — by design.</div>
+        </div>
+        <div class="fcol">
+          <h4>What competitors do vs what we do better</h4>
+          <p style="margin-bottom:0.5rem"><strong style="color:var(--mp-l)">Bankly Group Contributions</strong> offers digital Ajo at 15% interest — but it is a standalone microfinance app with limited reach and no AI layer.</p>
+          <p style="margin-bottom:0.5rem"><strong style="color:var(--mp-l)">OneBank (Sterling)</strong> has a basic Ajo feature — but has neither Moniepoint's 16M user base, 1M+ POS network, nor any intelligence layer.</p>
+          <p><strong style="color:var(--mp-l)">MonieCircle inside Moniepoint</strong> means every member already has a bank account. Auto-deduction works instantly. Cash-in is possible via 1 million POS terminals across all 774 local governments. No other Ajo product in Nigeria can say that.</p>
+        </div>
+        <div class="fcol">
+          <h4>The moat</h4>
+          <p>Millions of informal Ajo groups move onto a regulated, transparent platform. Every new member is a potential Moniepoint personal banking user — recruited organically by their own trusted circle. The Ajo group becomes a Moniepoint acquisition engine.</p>
+          <p style="margin-top:0.5rem">No standalone Ajo app can replicate Moniepoint's infrastructure advantage. This is the first feature that turns a cultural behaviour into a banking flywheel.</p>
+          <div class="pill">First major bank to own Ajo at this scale</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- MONIEGOAL -->
+    <div class="fi" onclick="toggleF(this)">
+      <div class="fh">
+        <div class="fl2"><span class="ftag">02</span><span class="fname">MonieGoal</span><span class="fsub">&nbsp;— Shared Savings, Smarter</span></div>
+        <div style="display:flex;align-items:center"><span class="ftl">Same dream, shared hustle</span><span class="ftog">+</span></div>
+      </div>
+      <div class="fbody"><div class="fcols">
+        <div class="fcol">
+          <h4>What it is</h4>
+          <p>Two or more people set a shared savings goal — a car, rent, a business, a trip. Each contributes to one pooled target. All parties see the real-time breakdown of who contributed what, how much is in the pot, and exactly how close they are to the goal. Interest accrues on the pooled balance. Nobody can withdraw without a process.</p>
+          <div class="honest-box"><strong>Honest context:</strong> Piggyvest has Group Target Savings and Cowrywise has Money Duo. MonieGoal goes further — here is exactly how and why.</div>
+        </div>
+        <div class="fcol">
+          <h4>What competitors do vs what we do better</h4>
+          <p style="margin-bottom:0.5rem"><strong style="color:var(--mp-l)">Piggyvest Group Target Savings</strong> — each member's funds stay completely separate. There is no shared pot. No mutual accountability on a single balance. No approval layer. It is parallel individual savings toward a common target, not true joint savings.</p>
+          <p style="margin-bottom:0.5rem"><strong style="color:var(--mp-l)">Cowrywise Money Duo</strong> — limited to exactly two people, locked to one year, and exists on a standalone savings app with no banking ecosystem around it.</p>
+          <p><strong style="color:var(--mp-l)">MonieGoal</strong> is multi-party (two or more), flexible on timeline, lives inside a full banking product — and has an AI pace intelligence layer no competitor offers. It is the only true shared savings pot in Nigerian fintech.</p>
+        </div>
+        <div class="fcol">
+          <h4>The moat</h4>
+          <p>Couples, business partners, friend groups, and families currently manage shared goals across WhatsApp threads, spreadsheets, and informal trust. MonieGoal gives them a single accountable pot inside a bank they already use.</p>
+          <p style="margin-top:0.5rem">The key differentiator from every competitor is Moniepoint's banking backbone — transfers, auto-contributions, and interest all work natively. No other group savings product in Nigeria has this.</p>
+          <div class="pill">True shared pot — no equivalent in Nigerian banking</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- MONIEVAULT -->
+    <div class="fi" onclick="toggleF(this)">
+      <div class="fh">
+        <div class="fl2"><span class="ftag">03</span><span class="fname">MonieVault</span><span class="fsub">&nbsp;— Joint Control</span></div>
+        <div style="display:flex;align-items:center"><span class="ftl">Shared money, shared trust</span><span class="ftog">+</span></div>
+      </div>
+      <div class="fbody"><div class="fcols">
+        <div class="fcol">
+          <h4>What it is</h4>
+          <p>A shared wallet created within a personal Moniepoint account where any withdrawal requires approval from all parties before money moves. Interest-bearing. Multi-party. Approval gates built in by default. Designed for couples, co-founders, siblings, and anyone who wants to save together with full mutual accountability.</p>
+        </div>
+        <div class="fcol">
+          <h4>What competitors do vs what we do better</h4>
+          <p style="margin-bottom:0.5rem"><strong style="color:var(--mp-l)">Traditional joint bank accounts</strong> require physical presence, marriage certificates, and paperwork. They have no approval flow — either party can withdraw without permission.</p>
+          <p><strong style="color:var(--mp-l)">No Nigerian fintech</strong> has a digital multi-party approval-gated wallet with interest. MonieVault is the first. The closest global comparison is a trust account — but MonieVault is digital, instant, and built for everyday Nigerians who do not have access to wealth management products.</p>
+        </div>
+        <div class="fcol">
+          <h4>The moat</h4>
+          <p>Solves a deeply human problem — saving together without fighting about spending. The approval gate is the entire product insight: it forces conscious, mutual decision-making before any money moves. Interest rewards the discipline of keeping it locked.</p>
+          <p style="margin-top:0.5rem">Zero competition in Nigerian fintech. This is genuinely unbuilt territory.</p>
+          <div class="pill">Completely uncharted in Nigerian fintech</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- MONIEPOCKET -->
+    <div class="fi" onclick="toggleF(this)">
+      <div class="fh">
+        <div class="fl2"><span class="ftag">04</span><span class="fname">MoniePocket</span><span class="fsub">&nbsp;— Parent to Child</span></div>
+        <div style="display:flex;align-items:center"><span class="ftl">Send love, schedule it</span><span class="ftog">+</span></div>
+      </div>
+      <div class="fbody"><div class="fcols">
+        <div class="fcol">
+          <h4>What it is</h4>
+          <p>A parent-controlled wallet linked to a child's Moniepoint account. Parents fund it, set automatic allowance schedules, and approve or decline every withdrawal request. The child must give a reason before any money moves. Parents receive a weekly AI-generated spend digest showing exactly where the money went and suggesting smarter scheduling.</p>
+        </div>
+        <div class="fcol">
+          <h4>What competitors do vs what we do better</h4>
+          <p style="margin-bottom:0.5rem"><strong style="color:var(--mp-l)">Globally</strong>, Greenlight (USA) and GoHenry (UK) have built parent-child finance tools — but neither exists in Nigeria.</p>
+          <p style="margin-bottom:0.5rem"><strong style="color:var(--mp-l)">Google Pay India</strong> launched Pocket Money via UPI Circle in December 2025 — but only in India, and without the AI digest layer.</p>
+          <p><strong style="color:var(--mp-l)">In Nigeria, zero.</strong> No bank, no fintech, no app has built this. MoniePocket is Nigeria's first. And unlike global competitors, it sits inside a full banking product — meaning parents and children are already on the same platform.</p>
+        </div>
+        <div class="fcol">
+          <h4>The moat</h4>
+          <p>Captures an entirely new user segment — students, secondary school boarders, university students, and their busy parents. Every Nigerian parent who has ever forgotten to send allowance or argued with a child about money is the target user.</p>
+          <p style="margin-top:0.5rem">The AI digest transforms MoniePocket from a transfer tool into a parenting intelligence product — and nothing like it exists anywhere in African fintech today.</p>
+          <div class="pill">Nigeria's first family finance feature</div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- FLOW -->
+<div style="background:var(--bg2);padding:5rem 1.5rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sl">MonieCircle · User Flow</div>
+    <div class="st">How it works,<br><span>step by step.</span></div>
+    <p class="sb" style="max-width:580px">Every step designed around a validated user insight. No new app. No extra signup. Just open Moniepoint.</p>
+    <div class="flow-wrap">
+      <div class="flow-row">
+        <div class="flow-s">
+          <div class="flow-n">Step 01</div>
+          <div class="flow-ttl">Create Circle</div>
+          <div class="flow-txt">Admin creates a private group, sets name, contribution amount, start date, and payout rotation. Members invited by phone or account number only — nobody joins without a known connection.</div>
+          <div class="flow-note">Research-backed: groups built from personal networks only.</div>
+        </div>
+        <div class="flow-s">
+          <div class="flow-n">Step 02</div>
+          <div class="flow-ttl">Members Accept</div>
+          <div class="flow-txt">Each member receives a notification and reviews the full terms — amount, their payout position, schedule — before confirming. Nobody joins blind or uninformed.</div>
+        </div>
+        <div class="flow-s hl">
+          <div class="flow-n">Step 03 · Key</div>
+          <div class="flow-ttl">Full Transparency</div>
+          <div class="flow-txt">Every member sees a live dashboard — who paid, who has not, the circle balance, and next payout date. The admin cannot hide anything from anyone. This is the feature that kills fraud.</div>
+          <div class="flow-note">Research-backed: trust requires complete visibility.</div>
+        </div>
+        <div class="flow-s hl">
+          <div class="flow-n">Step 04 · Key</div>
+          <div class="flow-ttl">Auto-Deduction</div>
+          <div class="flow-txt">Moniepoint auto-debits each member on the due date. Monie Sense nudges low-balance members 3 days early. Cash-in is available via any of Moniepoint's 1M+ POS terminals nationwide.</div>
+          <div class="flow-note">Research-backed: delayed payouts are the number one coordinator pain point.</div>
+        </div>
+        <div class="flow-s">
+          <div class="flow-n">Step 05</div>
+          <div class="flow-ttl">Payout Day</div>
+          <div class="flow-txt">Funds minus the group-agreed platform fee auto-transfer to that month's recipient on schedule. Zero manual action. Zero coordinator stress. Zero delay.</div>
+        </div>
+        <div class="flow-s">
+          <div class="flow-n">Step 06</div>
+          <div class="flow-ttl">Cycle Repeats</div>
+          <div class="flow-txt">Circle auto-resets for the next recipient. Full history is permanently logged and viewable by all members. Circle renews or dissolves after the final payout.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- AI -->
+<div class="sec" id="ai">
+  <div class="sl">The Intelligence Layer</div>
+  <div class="st">Monie Sense —<br><span>what Revolut has.</span><br>What Nigeria does not yet.</div>
+  <p class="sb" style="max-width:620px">On March 20, 2026, Starling launched the UK's first agentic AI banking assistant using Google Gemini. On April 9, 2026, Revolut launched AIR to 13 million UK customers. Both built for the UK. Nothing like this exists for Nigeria. Monie Sense is that layer — built for our languages, our behaviours, and our realities. And every feature below maps directly to a validated pain point from our research.</p>
+
+  <div class="ai-grid">
+    <div class="ac">
+      <div class="ac-lbl">For MonieCircle · Research-backed</div>
+      <div class="ac-ttl">Default Prediction</div>
+      <div class="ac-txt">AI monitors each member's income and spending patterns. If a balance drops dangerously close to the contribution due date, Monie Sense nudges them privately — <span class="ac-hl">before the group notices, before it becomes drama.</span> Directly addresses the number one coordinator pain point from our interviews.</div>
+    </div>
+    <div class="ac">
+      <div class="ac-lbl">For MonieCircle · Research-backed</div>
+      <div class="ac-ttl">Ajo Trust Score</div>
+      <div class="ac-txt">A behavioural reliability rating built from each member's Moniepoint transaction history — income consistency, savings behaviour, bill payment patterns. Shown before anyone joins a circle. <span class="ac-hl">No credit bureau needed.</span> Directly answers the traceability need from our interviews. No Ajo app in Nigeria offers this.</div>
+    </div>
+    <div class="ac">
+      <div class="ac-lbl">For MonieGoal</div>
+      <div class="ac-ttl">Goal Pace Intelligence</div>
+      <div class="ac-txt">AI tracks group contribution pace in real time and tells members proactively: <span class="ac-hl">"At this rate, you will hit your goal 3 weeks late — here is how to close the gap."</span> Accountability without the awkward conversation. Neither Piggyvest nor Cowrywise offers this.</div>
+    </div>
+    <div class="ac">
+      <div class="ac-lbl">For MoniePocket</div>
+      <div class="ac-ttl">Parent Intelligence Digest</div>
+      <div class="ac-txt">AI learns the child's spending patterns over time. Parents receive a weekly digest: <span class="ac-hl">"Your child tends to run low mid-week. Consider scheduling ₦5,000 on Wednesdays."</span> Parenting, powered by data. No equivalent exists in any Nigerian fintech product.</div>
+    </div>
+    <div class="ac">
+      <div class="ac-lbl">Across All Features</div>
+      <div class="ac-ttl">Conversational Money Assistant</div>
+      <div class="ac-txt">Type or voice-note in Pidgin, Yoruba, Igbo, or English: <span class="ac-hl">"How far, how much I don spend on food this month?"</span> Monie Sense answers instantly from your transaction data. Nigeria's first truly local AI money assistant — no menus, just conversation.</div>
+    </div>
+    <div class="ac">
+      <div class="ac-lbl">Across All Features</div>
+      <div class="ac-ttl">Financial Health Score</div>
+      <div class="ac-txt">Weekly personalised score built from income, spending, and savings patterns. Not generic advice — <span class="ac-hl">your data, your score, your specific next step.</span> Built with the same philosophy as what Revolut's AIR and Starling's Assistant are delivering in the UK. Delivered for Nigeria.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- PLATFORM -->
+<div class="platform-sec" id="platform">
+  <div class="platform-inner">
+    <div class="sl">The Fuel · The Platform Nigeria · May 1, 2026</div>
+    <div class="st">I was in the room<br><span>when you spoke.</span></div>
+
+    <div class="platform-quote">
+      <div class="pq-tag">Tosin Eniolorunda · The Platform Nigeria · May 1, 2026</div>
+      <div class="pq-name">Tosin Eniolorunda</div>
+      <div class="pq-role">Founder and CEO, Moniepoint · Topic: "It's About Making Ideas Happen"</div>
+      <div class="pq-body">You told the room that Nigeria needs to produce builders who can execute at a global level. That self-deception is not a virtue. That structures must serve goals, not individuals. That execution is everything in this game. <em>I heard every word. This pitch is my direct response to that challenge. Not a CV. Execution.</em></div>
+      <div class="pq-quote">"The biggest problem of an entrepreneur is yourself — and when you conquer yourself, you conquer the world. Self-deception isn't a virtue and we must tell ourselves the home truth. Execution is everything in this game."</div>
+    </div>
+
+    <div class="platform-story">
+      <p>On May 1st, 2026 — Workers' Day — I sat in The Covenant Place, Iganmu, as a member of <strong>The Covenant Nation</strong>, and listened to you speak at <strong>The Platform Nigeria</strong>.</p>
+      <br>
+      <p>I left that room with my notebook full and my mind made up. You called for Nigerians who can build and execute at a global level. <em>I am here to prove I am one of them.</em></p>
+      <br>
+      <p>Not with a CV. With a product pitch — user-researched, fact-checked against every competitor, designed with honest analysis, and built to the standard you described from that stage. I proved the value first, exactly as you said.</p>
+    </div>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- ABOUT -->
+<div class="sec" id="about">
+  <div class="sl">Who is Victor?</div>
+  <div class="about-g">
+    <div>
+      <div class="st">A designer who ships,<br><span>leads, and owns.</span></div>
+      <p class="sb">Lead Product Designer at Fast Credit Limited. 5+ years across fintech, e-commerce, and SaaS. OAU Ile-Ife alumnus. Member of The Covenant Nation. Builder by instinct — not instruction.</p>
+      <p class="sb" style="margin-top:1rem">None of this pitch was assigned to me. I built it because I believe in the problem, in Moniepoint's mission, and in the principle that the best designers do not wait to be asked.</p>
+      <p class="sb" style="margin-top:1rem">That same instinct made me redesign Fast Credit's entire website without a brief — after overhearing the sales team fielding calls that a better product would have answered automatically. I walked into the boardroom, presented the case, and shipped it. That is not extra credit. It is just how I work.</p>
+    </div>
+    <div class="impact-stack">
+      <div class="ii"><div class="inum">10,000+</div><div class="idesc">Customers onboarded to Fast Credit's first-ever mobile app — led end-to-end as sole product designer, from zero to live launch</div></div>
+      <div class="ii"><div class="inum">25% &#8595;</div><div class="idesc">Drop-off reduction after identifying onboarding friction during Alpha — excessive steps, Tier 3 requirements blocking early users — and leading the cross-functional redesign with PM, Engineering, and stakeholders</div></div>
+      <div class="ii"><div class="inum">70% &#8593;</div><div class="idesc">Engagement increase from a website redesign I initiated myself — no brief given — including a loan calculator built after overhearing the sales team's pain points firsthand</div></div>
+      <div class="ii"><div class="inum">90% &#8595;</div><div class="idesc">Design-to-development time cut after building and maintaining a scalable design system across all Fast Credit products</div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:4rem">
+    <div class="sl">What I Bring to Moniepoint</div>
+    <div class="st">Not just a designer.<br><span>A growth partner.</span></div>
+    <p class="sb" style="max-width:600px;margin-bottom:0">I am not coming to collect a salary. I am coming to learn, grow, and contribute to a mission that matters.</p>
+    <div class="val-strip">
+      <div class="val-c">
+        <span class="val-icon">&#127807;</span>
+        <div class="val-title">Here to Learn</div>
+        <div class="val-body">Just as you learned at Interswitch before conceiving what became Moniepoint, I understand the best builders are always students first. <em>Moniepoint's scale, complexity, and mission is the sharpest classroom I could ask for.</em></div>
+      </div>
+      <div class="val-c">
+        <span class="val-icon">&#129309;</span>
+        <div class="val-title">Here to Contribute</div>
+        <div class="val-body">Great teams are made of people who show up, collaborate, and take ownership beyond their job description. <em>I bring cross-functional instinct, user research experience, and a bias for action that does not wait to be asked.</em></div>
+      </div>
+      <div class="val-c">
+        <span class="val-icon">&#128161;</span>
+        <div class="val-title">Here to Innovate</div>
+        <div class="val-body">This pitch proves I do not just execute briefs — I identify cultural gaps, validate them with real users, and present them with a business case. <em>Moniepoint's next chapter will be won by designers who think like product strategists. I already do.</em></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- CTA -->
+<div class="cta-block">
+  <div class="cta-inner">
+    <h3>If this pitch made you think,<br>20 minutes will confirm it.</h3>
+    <p>I am not asking for a job offer. I am asking for a conversation — between two Ife people who both believe execution is everything.</p>
+    <a href="https://calendly.com/ajiboduvictor/moniepoint" target="_blank" class="cta-btn">Book a 20-minute call &#8594;</a>
+    <div class="cta-sub">No pressure. No slide deck. Just a conversation.</div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing-top" id="closing">
+  <div class="closing-bg"></div>
+  <div class="closing-grid"></div>
+  <div class="closing-inner">
+    <div class="sl" style="color:rgba(255,255,255,0.5)">The Ask</div>
+    <h2>
+      Tosin, you sat in Interswitch's halls,<br>
+      learning quietly —<br>
+      then built something<br>
+      <span>the world was not ready for.</span><br><br>
+      I sat in yours on May 1st.<br>
+      Let me earn my seat at Moniepoint.
+    </h2>
+    <p class="closing-sub">
+      I am here for the mission — making financial happiness real for every Nigerian, in every corner of this country. I want to learn within this environment, grow alongside a team that has already changed the game, and contribute through great design, great ownership, and relentless innovation.<br><br>
+      I validated the research. I fact-checked every competitor. I designed the flow. I built the case.<br>
+      <strong style="color:rgba(255,255,255,0.85)">The only thing missing is the platform.</strong>
+    </p>
+    <div class="sig-name">Victor Ajibodu</div>
+    <div class="sig-role">Lead Product Designer · OAU Ile-Ife · TCN Member · ajiboduvictor@gmail.com · +234 813 593 5097</div>
+    <div class="sig-links">
+      <a href="https://victorajibodu.framer.website">Portfolio &#8594;</a>
+      <a href="https://linkedin.com/in/victor-ajibodu">LinkedIn &#8594;</a>
+      <a href="https://behance.net/victorajibodu">Behance &#8594;</a>
+      <a href="https://calendly.com/ajiboduvictor/moniepoint">Book a Call &#8594;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ANTHEM -->
+<div class="anthem-block">
+  <div class="ain">
+    <div class="achant">Great Ife!&nbsp;&nbsp;Great Ife!</div>
+    <div class="adivline"></div>
+    <div class="averse">
+      Africa's most beautiful campus<br>
+      Conscious, vigilant, progressive<br>
+      Aluta against all oppression<br>
+      Forward ever, backward never<br>
+      For learning and culture, sports and struggle
+    </div>
+    <div class="adivline"></div>
+    <div class="alove">Great Ife! I love you.</div>
+    <div class="acounterfeit">
+      <span class="acf1">There is only one Great Ife in the universe.</span>
+      <span class="acf2">Another Great Ife is a counterfeit.</span>
+    </div>
+    <div class="agreats">
+      <span class="agr">Great!</span>
+      <span class="agr">Great!</span>
+      <span class="agr">Great!</span>
+      <span class="agr">Great!</span>
+      <span class="agr">Greeeaaaat!!!</span>
+    </div>
+    <div class="afoot">OAU Ile-Ife · Est. 1962 · Aluta Continua · Forward Ever, Backward Never · TCN Family</div>
+  </div>
+</div>
+
+<script>
+function toggleF(el){
+  document.querySelectorAll('.fi').forEach(i=>{if(i!==el)i.classList.remove('open')});
+  el.classList.toggle('open');
+}
+function toggleMenu(){
+  document.getElementById('navlinks').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('navlinks').classList.remove('open');
+}
+window.addEventListener('scroll',()=>{
+  const p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+});
+document.addEventListener('click',(e)=>{
+  if(!document.querySelector('nav').contains(e.target))closeMenu();
+});
+</script>
+</body>
+</html>
